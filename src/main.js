@@ -1,7 +1,7 @@
 // WhatsApp oficial confirmado pela cliente: país + DDD + número.
 const WHATSAPP_NUMBER = '5527988953205';
 const products = [
-  {name:'Pão caseiro tradicional',category:'paes',label:'O QUERIDINHO DA CASA',image:'pao-artesanal.webp',alt:'Pão caseiro de casca dourada e miolo macio',description:'Casquinha dourada, miolo macio e aquele sabor que abraça. O par perfeito para um café fresquinho.',tag:'Sabor de casa'},
+  {name:'Pão caseiro tradicional',category:'paes',label:'O QUERIDINHO DA CASA',image:'pao-caseiro-tradicional.webp',alt:'Pão caseiro tradicional de casca lisa e fatias de miolo macio',description:'Casquinha dourada, miolo macio e aquele sabor que abraça. O par perfeito para um café fresquinho.',tag:'Sabor de casa'},
   {name:'Pãezinhos caseiros',category:'paes',label:'PARA COMPARTILHAR',image:'paezinhos.webp',alt:'Cesta de pãezinhos caseiros dourados',description:'Pequenos no tamanho, generosos no carinho. Para deixar a mesa do café ainda mais especial.',tag:'Para dividir'},
   {name:'Bolo caseiro',category:'bolos',label:'UM PEDACINHO DE AFETO',image:'bolo.webp',alt:'Bolo caseiro dourado em um prato de cerâmica',description:'Uma fatia de aconchego para adoçar a tarde. Consulte os sabores disponíveis para encomenda.',tag:'Pausa gostosa'},
 ];
