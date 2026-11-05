@@ -1,0 +1,17 @@
+// WhatsApp oficial confirmado pela cliente: país + DDD + número.
+const WHATSAPP_NUMBER = '5527988953205';
+const products = [
+  {name:'Pão caseiro tradicional',category:'paes',label:'O QUERIDINHO DA CASA',image:'pao-artesanal.webp',alt:'Pão caseiro de casca dourada e miolo macio',description:'Casquinha dourada, miolo macio e aquele sabor que abraça. O par perfeito para um café fresquinho.',tag:'Sabor de casa'},
+  {name:'Pãezinhos caseiros',category:'paes',label:'PARA COMPARTILHAR',image:'paezinhos.webp',alt:'Cesta de pãezinhos caseiros dourados',description:'Pequenos no tamanho, generosos no carinho. Para deixar a mesa do café ainda mais especial.',tag:'Para dividir'},
+  {name:'Bolo caseiro',category:'bolos',label:'UM PEDACINHO DE AFETO',image:'bolo.webp',alt:'Bolo caseiro dourado em um prato de cerâmica',description:'Uma fatia de aconchego para adoçar a tarde. Consulte os sabores disponíveis para encomenda.',tag:'Pausa gostosa'},
+];
+const icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a9 9 0 0 1-13.3 7.9L3 21l1.6-4.7A9 9 0 1 1 21 11.5Z"/><path d="M8 7c-2 2 3 8 6 8 1 0 2-2 1-2l-2-1-1 1-3-3 1-1-1-2Z"/></svg>';
+const container = document.querySelector('#products');
+function render(filter='todos') { container.innerHTML = products.filter(p=>filter==='todos'||p.category===filter).map(p=>`<article class="product"><div class="product-image"><img src="/images/${p.image}" alt="${p.alt}" loading="lazy"><span>${p.tag}</span></div><div class="product-copy"><div class="product-label">${p.label}</div><h3>${p.name}</h3><p>${p.description}</p><div class="product-bottom"><span>Feito sob encomenda</span><span>✦</span></div><button class="order-product" data-order="${p.name}">${icon} Pedir pelo WhatsApp <span>↗</span></button></div></article>`).join(''); }
+render();
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-pressed','false')});button.classList.add('active');button.setAttribute('aria-pressed','true');render(button.dataset.filter)}));
+const dialog=document.querySelector('#contact-dialog');
+document.addEventListener('click',event=>{const button=event.target.closest('[data-order]');if(!button)return;if(!WHATSAPP_NUMBER){dialog.showModal();return;}const product=button.dataset.order;const message=product?`Olá, Claudia! Tenho interesse em ${product}. Pode me informar o valor e a disponibilidade?`:'Olá, Claudia! Gostaria de conhecer os sabores disponíveis e fazer uma encomenda.';window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');});
+document.querySelectorAll('.close-dialog,.close-contact').forEach(b=>b.addEventListener('click',()=>dialog.close()));
+dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}});
+const toggle=document.querySelector('.menu-toggle');const nav=document.querySelector('nav');toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open)});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false')}));document.querySelector('#year').textContent=new Date().getFullYear();
